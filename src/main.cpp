@@ -1,5 +1,6 @@
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
+#include <esp_sleep.h>
 
 #define SENSOR 33
 #define LED 26
@@ -14,13 +15,8 @@ void setup() {
   pinMode(LED, OUTPUT);
   Serial.begin(9600);
   dht.begin();
-}
 
-void loop() {
-  // Effectuer une mesure toutes les 5s
-  delay(5000);
-
-  // Mesurer l'humidité relative et la température
+  // Effectuer une mesure au début
   float humidity = dht.readHumidity();
   float temperature = dht.readTemperature();
 
@@ -33,5 +29,12 @@ void loop() {
   Serial.print("Temperature : ");
   Serial.print(temperature);
   Serial.println("°C");
+
+  // Mettre l'ESP32 en mode Deep sleep pendant 5 secondes
+  esp_sleep_enable_timer_wakeup(5 * 1000000); // 5 seconds
+  esp_deep_sleep_start();
 }
 
+void loop() {
+  // La boucle doit rester vide, car la logique a été déplacée dans la fonction setup
+}
