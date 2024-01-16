@@ -6,7 +6,7 @@
 #define LED 26
 
 #define DHTPIN SENSOR
-#define DHTTYPE DHT11 // Remplacez par le type de votre capteur (DHT11, DHT21, DHT22)
+#define DHTTYPE DHT11 
 
 DHT dht(DHTPIN, DHTTYPE);
 
@@ -20,12 +20,12 @@ void setup() {
   float humidity = dht.readHumidity();
   float temperature = dht.readTemperature();
 
-  // Afficher l'humidité relative avec un peu de formatage
+  // Afficher l'humidité 
   Serial.print("Humidite relative : ");
   Serial.print(humidity);
   Serial.println("%");
 
-  // Afficher la température avec un peu de formatage
+  // Afficher la température 
   Serial.print("Temperature : ");
   Serial.print(temperature);
   Serial.println("°C");
@@ -36,5 +36,4 @@ void setup() {
 }
 
 void loop() {
-  // La boucle doit rester vide, car la logique a été déplacée dans la fonction setup
 }
